@@ -3,6 +3,7 @@ import { defineCollection, z } from 'astro:content';
 const whitepaperSchema = z.object({
   title: z.string(),
   description: z.string(),
+  lang: z.enum(['en', 'ar'])
 });
 
 const whitepaperCollection = defineCollection({
