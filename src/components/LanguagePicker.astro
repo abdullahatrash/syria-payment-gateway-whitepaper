@@ -1,0 +1,42 @@
+---
+const { pathname } = Astro.url;
+const currentLocale = pathname.includes('/ar') ? 'ar' : 'en';
+const switchLocale = currentLocale === 'en' ? 'ar' : 'en';
+const switchPath = pathname.replace(`/${currentLocale}`, `/${switchLocale}`);
+---
+
+<div class="language-picker">
+  <a href={switchPath} class="lang-link">
+    {currentLocale === 'en' ? 'العربية' : 'English'}
+  </a>
+</div>
+
+<style>
+  .language-picker {
+    display: flex;
+    align-items: center;
+  }
+
+  .lang-link {
+    padding: 0.5rem 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    text-decoration: none;
+    color: #333;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+  }
+
+  .lang-link:hover {
+    background: #f8fafc;
+    border-color: #3245FF;
+    color: #3245FF;
+  }
+
+  @media (max-width: 640px) {
+    .lang-link {
+      padding: 0.4rem 0.8rem;
+      font-size: 0.8rem;
+    }
+  }
+</style> 

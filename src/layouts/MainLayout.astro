@@ -1,0 +1,120 @@
+---
+import '../styles/global.css';
+import LanguagePicker from '../components/LanguagePicker.astro';
+
+interface Props {
+  title: string;
+  dir?: 'ltr' | 'rtl';
+}
+
+const { title, dir = 'ltr' } = Astro.props;
+const currentLocale = Astro.url.pathname.includes('/ar') ? 'ar' : 'en';
+---
+
+<html lang={currentLocale} dir={dir}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div class="layout">
+      <header class="header">
+        <div class="header-content">
+          <a href={`/${currentLocale}`} class="logo">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="40" height="40" rx="8" fill="#3245FF"/>
+              <path d="M12 20H28M20 12V28" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <span>WhitePaper</span>
+          </a>
+          <LanguagePicker />
+        </div>
+      </header>
+
+      <main>
+        <slot />
+      </main>
+
+      <footer>
+        <p>&copy; 2024 Your Name</p>
+      </footer>
+    </div>
+  </body>
+</html>
+
+<style>
+  .layout {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .header {
+    background: white;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+  }
+
+  .logo:hover {
+    color: #3245FF;
+  }
+
+  main {
+    flex: 1;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  footer {
+    background: white;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 -1px 2px rgba(0,0,0,0.1);
+  }
+
+  [dir="rtl"] .header-content {
+    flex-direction: row-reverse;
+  }
+
+  [dir="rtl"] .logo {
+    flex-direction: row-reverse;
+  }
+
+  @media (max-width: 640px) {
+    .header-content {
+      padding: 0.8rem 1rem;
+      gap: 1rem;
+    }
+
+    .logo span {
+      display: none;
+    }
+  }
+</style> 

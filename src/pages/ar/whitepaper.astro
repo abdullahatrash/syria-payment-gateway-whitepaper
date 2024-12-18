@@ -1,0 +1,57 @@
+---
+import { getEntry } from 'astro:content';
+import MainLayout from '../../layouts/MainLayout.astro';
+
+const whitepaper = await getEntry('ar', 'whitepaper');
+if (!whitepaper) throw new Error('Whitepaper not found');
+const { Content } = await whitepaper.render();
+---
+
+<MainLayout title={whitepaper.data.title} dir="rtl">
+  <article class="whitepaper">
+    <Content />
+  </article>
+</MainLayout>
+
+<style>
+  .whitepaper {
+    padding: 2rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  .whitepaper :global(h1) {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: #1a1a1a;
+  }
+
+  .whitepaper :global(h2) {
+    font-size: 1.8rem;
+    margin: 2rem 0 1rem;
+    color: #2a2a2a;
+  }
+
+  .whitepaper :global(h3) {
+    font-size: 1.4rem;
+    margin: 1.5rem 0 1rem;
+    color: #3a3a3a;
+  }
+
+  .whitepaper :global(p) {
+    margin-bottom: 1.2rem;
+    line-height: 1.7;
+  }
+
+  .whitepaper :global(ul) {
+    margin: 1rem 0;
+    padding-right: 1.5rem;
+    list-style-position: inside;
+  }
+
+  .whitepaper :global(li) {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+  }
+</style> 
