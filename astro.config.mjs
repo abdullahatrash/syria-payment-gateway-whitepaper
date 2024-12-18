@@ -1,11 +1,9 @@
-// @ts-check
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 
-// https://astro.build/config
 export default defineConfig({
-  site: 'https://yourusername.github.io',
-  base: '/',
+  site: 'https://abdullahatrash.github.io',
+  base: '/syria-payment-gateway-whitepaper',
   integrations: [mdx()],
   i18n: {
     defaultLocale: 'en',
@@ -14,4 +12,4 @@ export default defineConfig({
       prefixDefaultLocale: true
     }
   }
-});
+}); 
