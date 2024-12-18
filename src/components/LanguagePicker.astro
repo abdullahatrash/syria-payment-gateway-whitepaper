@@ -2,7 +2,8 @@
 const { pathname } = Astro.url;
 const currentLocale = pathname.includes('/ar') ? 'ar' : 'en';
 const switchLocale = currentLocale === 'en' ? 'ar' : 'en';
-const switchPath = pathname.replace(`/${currentLocale}`, `/${switchLocale}`);
+const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
+const switchPath = `${baseUrl}/${switchLocale}${pathname.replace(`/${currentLocale}`, '')}`;
 ---
 
 <div class="language-picker">
